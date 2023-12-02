@@ -1,0 +1,13 @@
+name: Test code
+on:
+  push:
+     branches: [master]
+jobs:
+  test:
+    name: Test code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v3
+      - name: Run tests
+        run: docker run --rm $(docker build -q .)

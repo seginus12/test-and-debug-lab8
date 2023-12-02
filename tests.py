@@ -1,5 +1,6 @@
 from main import lab1
 import random
+import pytest
 
 
 class Tests:
@@ -18,18 +19,28 @@ class Tests:
         random.shuffle(arr_shuffled)
         assert lab1.insertion_sorting(arr_shuffled) == arr
 
-    # is_palindrome test
+    @staticmethod
+    def test_insertion_sorting_3():
+        with pytest.raises(TypeError) as excinfo:
+            lab1.insertion_sorting("string")
+        assert excinfo.typename == "TypeError"
+
+        # is_palindrome test
     @staticmethod
     def test_check_palindrome_1():
         assert lab1.is_palindrome("POTOP") == True
 
     @staticmethod
     def test_check_palindrome_2():
-        assert lab1.is_palindrome("aoaoaoa") == True
+        with pytest.raises(TypeError) as excinfo:
+            lab1.is_palindrome([454])
+        assert excinfo.typename == "TypeError"
 
     @staticmethod
     def test_check_palindrome_3():
-        assert lab1.is_palindrome(4) == False
+        with pytest.raises(TypeError) as excinfo:
+            lab1.is_palindrome(4)
+        assert excinfo.typename == "TypeError"
 
     # get_factorial test
     @staticmethod
@@ -38,7 +49,9 @@ class Tests:
 
     @staticmethod
     def test_get_factorial_2():
-        assert lab1.get_factorial("python kruta") == 120
+        with pytest.raises(TypeError) as excinfo:
+            lab1.get_factorial("string")
+        assert excinfo.typename == "TypeError"
 
     # get_fibonacci_number_by_position test
     @staticmethod
@@ -75,4 +88,7 @@ class Tests:
 
     @staticmethod
     def test_lab1_is_prime_3():
-        assert lab1.is_prime("string") == False
+        with pytest.raises(TypeError) as excinfo:
+            lab1.is_prime("string")
+        assert excinfo.typename == "TypeError"
+
